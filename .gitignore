@@ -1,0 +1,8 @@
+*.log
+buildcache
+coverage
+docs
+debug
+lib
+node_modules
+test-output

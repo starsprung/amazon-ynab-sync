@@ -1,0 +1,83 @@
+{
+  "name": "amazon-ynab-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -b src",
+    "clean": "rm -rf buildcache coverage lib test-output",
+    "commit": "cz",
+    "coverage": "jest --coverage --no-cache",
+    "docs": "typedoc",
+    "lint": "eslint src",
+    "prepack": "npm run clean && npm run build",
+    "start": "node lib/index.js",
+    "start:dev": "ts-node --dir src index.ts",
+    "test": "jest",
+    "test:ci": "jest --ci"
+  },
+  "author": "Shaun Starsprung <s@starsprung.com>",
+  "repository": "github:starsprung/amazon-ynab-sync",
+  "license": "MIT",
+  "dependencies": {
+    "amazon-order-reports-api": "^3.2.1",
+    "env-paths": "^2.2.0",
+    "hasha": "^5.2.2",
+    "inquirer": "^6.5.2",
+    "it-batch": "^1.0.6",
+    "make-dir": "^3.1.0",
+    "winston": "^3.3.3",
+    "yargs": "^15.4.1",
+    "ynab": "^1.21.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/npm": "^7.0.9",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "@types/app-root-path": "^1.2.4",
+    "@types/inquirer": "^7.3.1",
+    "@types/luxon": "^1.25.0",
+    "@types/mockdate": "^2.0.0",
+    "@types/node": "^14.14.16",
+    "@types/yargs": "^15.0.12",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "app-root-path": "^3.0.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.16.0",
+    "husky": "^4.3.6",
+    "jest": "^26.6.3",
+    "jest-junit": "^12.0.0",
+    "mockdate": "^3.0.2",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "semantic-release": "^17.3.0",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.6",
+    "typescript": "^4.1.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  }
+}

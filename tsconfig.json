@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ES2020", "dom"],
+    "moduleResolution": "node",
+    "outDir": ".",
+    "resolveJsonModule": true,
+    "rootDir": ".",
+    "target": "ES2020",
+    "tsBuildInfoFile": "./buildcache/tsconfig.tsbuildinfo"
+  },
+  "files": ["package.json"]
+}
