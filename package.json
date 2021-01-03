@@ -9,11 +9,13 @@
   },
   "scripts": {
     "build": "tsc -b src",
-    "clean": "rm -rf buildcache coverage lib test-output",
+    "clean": "rimraf -rf buildcache coverage lib pkg test-output",
     "commit": "cz",
     "coverage": "jest --coverage --no-cache",
     "docs": "typedoc",
     "lint": "eslint src",
+    "pkg": "rimraf pkg && for PLATFORM in macos linux win; do pkg -t \"node14-${PLATFORM}-x64\" --out-path \"pkg/${npm_package_name}-${PLATFORM}\" .; done",
+    "postpkg": "for PKG in pkg/*; do tar czf \"${PKG}.tar.gz\" \"${PKG}\"; zip -r \"${PKG}.zip\" \"${PKG}\"; done",
     "prepack": "npm run clean && npm run build",
     "start": "node lib/index.js",
     "start:dev": "ts-node --dir src index.ts",
@@ -34,6 +36,8 @@
     "inquirer": "^6.5.2",
     "it-batch": "^1.0.6",
     "make-dir": "^3.1.0",
+    "puppeteer": "^5.5.0",
+    "puppeteer-extra-plugin-stealth": "^2.6.5",
     "winston": "^3.3.3",
     "yargs": "^15.4.1",
     "ynab-client": "npm:ynab@^1.21.0"
@@ -51,6 +55,7 @@
     "@types/luxon": "^1.25.0",
     "@types/mockdate": "^2.0.0",
     "@types/node": "^14.14.16",
+    "@types/puppeteer": "^5.4.2",
     "@types/yargs": "^15.0.12",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
@@ -61,13 +66,18 @@
     "jest": "^26.6.3",
     "jest-junit": "^12.0.0",
     "mockdate": "^3.0.2",
+    "pkg": "^4.4.9",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
+    "rimraf": "^3.0.2",
     "semantic-release": "^17.3.0",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.6",
     "typescript": "^4.1.3"
+  },
+  "pkg": {
+    "assets": "node_modules/puppeteer-extra-plugin-stealth/**/*.*"
   },
   "husky": {
     "hooks": {
@@ -82,7 +92,43 @@
       "@semantic-release/changelog",
       "@semantic-release/npm",
       "@semantic-release/git",
-      "@semantic-release/github"
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "label": "Linux (tar.gz)",
+              "name": "amazon-ynab-sync-linux-${nextRelease.version}.tar.gz",
+              "path": "pkg/amazon-ynab-sync-linux.tar.gz"
+            },
+            {
+              "label": "Linux (zip)",
+              "name": "amazon-ynab-sync-linux-${nextRelease.version}.zip",
+              "path": "pkg/amazon-ynab-sync-linux.zip"
+            },
+            {
+              "label": "macOS (tar.gz)",
+              "name": "amazon-ynab-sync-macos-${nextRelease.version}.tar.gz",
+              "path": "pkg/amazon-ynab-sync-macos.tar.gz"
+            },
+            {
+              "label": "macOS (zip)",
+              "name": "amazon-ynab-sync-macos-${nextRelease.version}.zip",
+              "path": "pkg/amazon-ynab-sync-macos.zip"
+            },
+            {
+              "label": "Windows (tar.gz)",
+              "name": "amazon-ynab-sync-win-${nextRelease.version}.tar.gz",
+              "path": "pkg/amazon-ynab-sync-win.tar.gz"
+            },
+            {
+              "label": "Windows (zip)",
+              "name": "amazon-ynab-sync-win-${nextRelease.version}.zip",
+              "path": "pkg/amazon-ynab-sync-win.zip"
+            }
+          ]
+        }
+      ]
     ]
   }
 }

@@ -4,6 +4,7 @@ import inquirer from 'inquirer';
 import { SaveTransaction } from 'ynab-client';
 import { readCache, writeCache } from './cache';
 import { getConfig } from './config';
+import { getPuppeteerExecutable } from './puppeteer';
 
 const config = getConfig();
 
@@ -67,7 +68,10 @@ export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTr
     logLevel: config.logLevel as LogLevel,
     cookies: ((await readCache('cookies')) as Array<Cookie>) ?? [],
     saveCookiesFn: (cookies: Array<Cookie>) => writeCache('cookies', cookies),
-    puppeteerOpts: config.debugMode ? { headless: false, slowMo: 100 } : {},
+    puppeteerOpts: {
+      executablePath: await getPuppeteerExecutable(),
+      ...(config.debugMode ? { headless: false, slowMo: 100 } : {}),
+    },
   });
 
   try {
