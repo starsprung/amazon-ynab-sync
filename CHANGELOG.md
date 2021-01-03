@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/starsprung/amazon-ynab-sync/compare/v1.0.1...v1.0.2) (2021-01-03)
+
+
+### Bug Fixes
+
+* remove app-root-path for version ([ac42e4a](https://github.com/starsprung/amazon-ynab-sync/commit/ac42e4a9fc89e28999887809fb1f624ec124c141))
+
 ## [1.0.1](https://github.com/starsprung/amazon-ynab-sync/compare/v1.0.0...v1.0.1) (2021-01-03)
 
 
