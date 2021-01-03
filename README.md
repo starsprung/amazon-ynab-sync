@@ -6,9 +6,9 @@ The basic concept is to have a dedicated account within YNAB for Amazon transati
 then be set as transfers to this Amazon account. This makes categorizing Amazon spending much easier, as every individual item is its
 own transaction.
 
-Internally, this runs a headless instance of Chromium controlled by Puppeteer to login to your Amazon account, retrieve your transations
-and submits them to YNAB using the YNAB API. This utilizes Amazon's Order History Reports functionality, which generates e-mails from Amazon,
-[see below](#email-notifications) a suggestion for handling these.
+Internally, this runs a headless instance of [Chromium](https://www.chromium.org/) controlled by [Puppeteer](https://github.com/puppeteer/puppeteer)
+to login to your Amazon account, retrieve your transations and submits them to YNAB using the YNAB API. This utilizes Amazon's Order History Reports
+functionality, which generates e-mails from Amazon, [see below](#email-notifications) a suggestion for handling these.
 
 ## Pre-requisites
 - [Node.js](https://nodejs.org/) >= 15.x
