@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.0.2...v1.1.0) (2021-01-03)
+
+
+### Features
+
+* add --cleared option ([59d2615](https://github.com/starsprung/amazon-ynab-sync/commit/59d2615d668b9786d689e209b18ff2419305ea20))
+
 ## [1.0.2](https://github.com/starsprung/amazon-ynab-sync/compare/v1.0.1...v1.0.2) (2021-01-03)
 
 
