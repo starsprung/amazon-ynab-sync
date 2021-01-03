@@ -48,5 +48,8 @@ jobs:
         uses: docker://ghcr.io/enricomi/publish-unit-test-result-action:v1.6
         if: runner.os == 'Linux'
         with:
+          hide_comments: orphaned commits
+          check_name: Unit Test Results - ${{ matrix.os }} - node ${{ matrix.node-version }}
+          comment_title: Unit Test Statistics - ${{ matrix.os }} - node ${{ matrix.node-version }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: test-output/**/*.xml
