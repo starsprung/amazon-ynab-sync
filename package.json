@@ -23,6 +23,10 @@
   "author": "Shaun Starsprung <s@starsprung.com>",
   "repository": "github:starsprung/amazon-ynab-sync",
   "license": "MIT",
+  "engines": {
+    "node": ">=14.15.0",
+    "npm": ">=6.9.0"
+  },
   "dependencies": {
     "amazon-order-reports-api": "^3.2.1",
     "env-paths": "^2.2.0",

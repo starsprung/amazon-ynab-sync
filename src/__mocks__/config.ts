@@ -1,10 +1,11 @@
+import { normalize } from 'path';
 import { Config } from '../config';
 
 const mocks = {
   amazonOtpCode: jest.fn(() => '54321'),
   amazonPassword: jest.fn(() => 'pass123456'),
   amazonUsername: jest.fn(() => 'user@example.com'),
-  cacheDir: jest.fn(() => '/path/to/cache/'),
+  cacheDir: jest.fn(() => normalize('/path/to/cache/')),
   cleared: jest.fn(() => true),
   logLevel: jest.fn(() => 'none'),
   ynabAccessToken: jest.fn(() => 'f82918ba-4aa7-4805-b9be-fe5e87eaacf3'),
