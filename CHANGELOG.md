@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.2.0...v1.3.0) (2021-01-03)
+
+
+### Features
+
+* support external Chromium binary ([f7115ff](https://github.com/starsprung/amazon-ynab-sync/commit/f7115ff289bffb29fdb65defe34b733cccf8847b))
+
 # [1.2.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.1.0...v1.2.0) (2021-01-03)
 
 
