@@ -46,7 +46,7 @@ jobs:
 
       - name: Publish unit test results
         uses: docker://ghcr.io/enricomi/publish-unit-test-result-action:v1.6
-        if: always()
+        if: runner.os == 'Linux'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: test-output/**/*.xml
