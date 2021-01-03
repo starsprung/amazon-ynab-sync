@@ -1,3 +1,4 @@
+import appRootPath from 'app-root-path';
 import envPaths from 'env-paths';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -33,7 +34,20 @@ export const getConfig = (): Config => {
 
   return (config = {
     ...((yargs(process.argv.slice(2))
+      .usage('Usage: $0 [options]')
       .env()
+      .version(
+        ((): string => {
+          try {
+            const content = readFileSync(appRootPath.resolve('package.json'), {
+              encoding: 'utf-8',
+            });
+            return JSON.parse(content).version;
+          } catch {
+            return 'unable to get version';
+          }
+        })(),
+      )
       .option('amazon-otp-code', {
         describe: 'Amazon OTP/2SV code',
         type: 'string',
@@ -72,7 +86,7 @@ export const getConfig = (): Config => {
       .option('debug-mode', {
         default: false,
         describe: 'Run internal browser in visible mode and run in slo-mo mode',
-        type: 'string',
+        type: 'boolean',
       })
       .option('log-level', {
         choices: ['debug', 'info', 'error', 'none', 'silly'],
