@@ -32,7 +32,7 @@
     "make-dir": "^3.1.0",
     "winston": "^3.3.3",
     "yargs": "^15.4.1",
-    "ynab": "^1.21.0"
+    "ynab-client": "npm:ynab@^1.21.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

@@ -13,6 +13,7 @@ export interface Config {
   amazonOtpSecret?: string;
   cacheDir: string;
   configDir: string;
+  cleared: boolean;
   debugMode: boolean;
   logLevel: string;
   startDate: string;
@@ -71,6 +72,11 @@ export const getConfig = (): Config => {
         default: defaultConfigDir,
         describe: 'Location of config directory',
         type: 'string',
+      })
+      .option('cleared', {
+        default: true,
+        describe: 'Whether transactions should be added as cleared by default',
+        type: 'boolean',
       })
       .option('debug-mode', {
         default: false,

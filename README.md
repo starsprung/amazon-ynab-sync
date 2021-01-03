@@ -11,6 +11,7 @@ to login to your Amazon account, retrieve your transations and submits them to Y
 functionality, which generates e-mails from Amazon, [see below](#email-notifications) a suggestion for handling these.
 
 ## Pre-requisites
+
 - [Node.js](https://nodejs.org/) >= 15.x
 - [Your YNAB personal access token](https://api.youneedabudget.com/#personal-access-tokens)
 - Your Amazon.com login credentials
@@ -23,6 +24,7 @@ npm install -g amazon-ynab-sync
 ```
 
 On some systems if you're installing to a privileged location you may need:
+
 ```
 sudo npm install -g amazon-ynab-sync --unsafe-perm=true
 ```
@@ -34,13 +36,13 @@ Ensure you have the Node.js `bin` directory in your environment path.
 Ensure you have created a budget and an unlinked account in YNAB in which you want to record your Amazon transactions
 (I generally use a Cash account). In these examples I'll use the following as samples values:
 
-| Option | Value |
-| - | - |
-| Amazon username | test@example.com |
-| Amazon password | password123 |
-| YNAB access token | 437e0a95e9ce155e5deae9d105305988cac9f4664f480650cc18d3327cae36ec |
-| YNAB budget name | My Budget |
-| YNAB Amazon.com account name | Amazon.com |
+| Option                       | Value                                                            |
+| ---------------------------- | ---------------------------------------------------------------- |
+| Amazon username              | test@example.com                                                 |
+| Amazon password              | password123                                                      |
+| YNAB access token            | 437e0a95e9ce155e5deae9d105305988cac9f4664f480650cc18d3327cae36ec |
+| YNAB budget name             | My Budget                                                        |
+| YNAB Amazon.com account name | Amazon.com                                                       |
 
 ### Basic usage
 
@@ -73,6 +75,7 @@ amazon-ynab-sync
 ```
 
 #### 1Password
+
 ```
 AMAZON_USERNAME="$(op get item amazon.com --fields username)" \
 AMAZON_PASSWORD="$(op get item amazon.com --fields password)" \
@@ -92,12 +95,13 @@ amazon-ynab-sync
 Options can also be saved in a config file. The location of this file is platform-dependent:
 
 | Plaform | Location                                                                                            |
-|---------|-----------------------------------------------------------------------------------------------------|
+| ------- | --------------------------------------------------------------------------------------------------- |
 | Linux   | $XDG_CONFIG_HOME/amazon-ynab-sync/config.json <br/> or <br/> ~/.config/amazon-ynab-sync/config.json |
 | macOS   | ~/Library/Preferences/amazon-ynab-sync/config.json                                                  |
 | Windows | %AppData%\amazon-ynab-sync\Config\config.json                                                       |
 
 #### Example config.json
+
 ```
 {
   "amazonUsername": "test@example.com",
@@ -109,20 +113,21 @@ Options can also be saved in a config file. The location of this file is platfor
 
 ## Options
 
-| Command-line option | Environment Variable | Config file     | Description                                                                                                                                                                                                                                                   | Default                                                                                     |
-|---------------------|----------------------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| --amazon-otp-code   | AMAZON_OTP_CODE      | amazonOtpCode   | Amazon OTP/2SV code                                                                                                                                                                                                                                           |                                                                                             |
-| --amazon-otp-secret | AMAZON_OTP_SECRET    | amazonOtpSecret | Amazon OTP/2SV secret. This is the code you get during the Authenticator App setup on the Amazon 2SV Settings page. If this option is used, care should be taken to store this securely. An insecurely stored OTP secret is the same as not having OTP at all |                                                                                             |
-| --amazon-password   | AMAZON_PASSWORD      | amazonPassword  | Amazon password                                                                                                                                                                                                                                               |                                                                                             |
-| --amazon-username   | AMAZON_USERNAME      | amazonUsername  | Amazon username                                                                                                                                                                                                                                               |                                                                                             |
-| --cache-dir         | CACHE_DIR            | cacheDir        | Directory to use for caching API responses and cookies                                                                                                                                                                                                        | Linux: $XDG_CACHE_HOME/amazon-ynab-sync <br/> or <br/> ~/.cache/amazon-ynab-sync <br/><br/> macOS: ~/Library/Caches/amazon-ynab-sync <br/><br/> Windows: %LocalAppData%\amazon-ynab-sync\Cache |
+| Command-line option | Environment Variable | Config file     | Description                                                                                                                                                                                                                                                   | Default                                                                                                                                                                                            |
+| ------------------- | -------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| --amazon-otp-code   | AMAZON_OTP_CODE      | amazonOtpCode   | Amazon OTP/2SV code                                                                                                                                                                                                                                           |                                                                                                                                                                                                    |
+| --amazon-otp-secret | AMAZON_OTP_SECRET    | amazonOtpSecret | Amazon OTP/2SV secret. This is the code you get during the Authenticator App setup on the Amazon 2SV Settings page. If this option is used, care should be taken to store this securely. An insecurely stored OTP secret is the same as not having OTP at all |                                                                                                                                                                                                    |
+| --amazon-password   | AMAZON_PASSWORD      | amazonPassword  | Amazon password                                                                                                                                                                                                                                               |                                                                                                                                                                                                    |
+| --amazon-username   | AMAZON_USERNAME      | amazonUsername  | Amazon username                                                                                                                                                                                                                                               |                                                                                                                                                                                                    |
+| --cache-dir         | CACHE_DIR            | cacheDir        | Directory to use for caching API responses and cookies                                                                                                                                                                                                        | Linux: $XDG_CACHE_HOME/amazon-ynab-sync <br/> or <br/> ~/.cache/amazon-ynab-sync <br/><br/> macOS: ~/Library/Caches/amazon-ynab-sync <br/><br/> Windows: %LocalAppData%\amazon-ynab-sync\Cache     |
 | --config-dir        | CONFIG_DIR           | configDir       | Directory to look for config file                                                                                                                                                                                                                             | Linux: $XDG_CONFIG_HOME/amazon-ynab-sync <br/> or <br/> ~/.config/amazon-ynab-sync <br/><br/> macOS: ~/Library/Preferences/amazon-ynab-sync/ <br/><br/> Windows: %AppData%\amazon-ynab-sync\Config |
-| --debug-mode        | DEBUG_MODE           | debugMode       | Run the internal browser in visible/slo-mo mode                                                                                                                                                                                                               | false                                                                                       |
-| --log-level         | LOG_LEVEL            | logLevel        | Level of logs to output. Possible values: "debug", "info", "error", "none", "silly"                                                                                                                                                                           | info                                                                                        |
-| --start-date        | START_DATE           | startDate       | Only sync transactions which appear after this date.                                                                                                                                                                                                          | 30 days ago                                                                                 |
-| --ynab-access-token | YNAB_ACCESS_TOKEN    | ynabAccessToken | [YNAB personal access token](https://api.youneedabudget.com/#personal-access-tokens)                                                                                                                                                                          |                                                                                             |
-| --ynab-account-name | YNAB_ACCOUNT_NAME    | ynabAccountName | Name of YNAB account in which you wish to record Amazon transactions                                                                                                                                                                                          |                                                                                             |
-| --ynab-budget-name  | YNAB_BUDGET_NAME     | ynabBudgetName  | Name of the YNAB budget containing the above account                                                                                                                                                                                                          |                                                                                             |
+| --cleared           | CLEARED              | cleared         | Whether transactions should be added as cleared by default                                                                                                                                                                                                    | true                                                                                                                                                                                               |
+| --debug-mode        | DEBUG_MODE           | debugMode       | Run the internal browser in visible/slo-mo mode                                                                                                                                                                                                               | false                                                                                                                                                                                              |
+| --log-level         | LOG_LEVEL            | logLevel        | Level of logs to output. Possible values: "debug", "info", "error", "none", "silly"                                                                                                                                                                           | info                                                                                                                                                                                               |
+| --start-date        | START_DATE           | startDate       | Only sync transactions which appear after this date.                                                                                                                                                                                                          | 30 days ago                                                                                                                                                                                        |
+| --ynab-access-token | YNAB_ACCESS_TOKEN    | ynabAccessToken | [YNAB personal access token](https://api.youneedabudget.com/#personal-access-tokens)                                                                                                                                                                          |                                                                                                                                                                                                    |
+| --ynab-account-name | YNAB_ACCOUNT_NAME    | ynabAccountName | Name of YNAB account in which you wish to record Amazon transactions                                                                                                                                                                                          |                                                                                                                                                                                                    |
+| --ynab-budget-name  | YNAB_BUDGET_NAME     | ynabBudgetName  | Name of the YNAB budget containing the above account                                                                                                                                                                                                          |                                                                                                                                                                                                    |
 
 ## Email notifications
 
@@ -137,7 +142,7 @@ from:(no-reply@amazon.com) subject:(Your order history report)
 ## Troubleshooting
 
 In some cases on Linux you may need to install some additional Puppeteer dependencies manually. If you get error messages regarding
-failure to launch the browser process, see the 
+failure to launch the browser process, see the
 [Puppeteer troubleshooting section](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix).
 
 If you get failed sign-ins or other errors, you might try running with `--log-level silly --debug-mode` to get a better idea of what's happening.

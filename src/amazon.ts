@@ -1,7 +1,7 @@
 import { AmazonOrderReportsApi, Cookie, LogLevel } from 'amazon-order-reports-api';
 import hasha from 'hasha';
 import inquirer from 'inquirer';
-import { SaveTransaction } from 'ynab';
+import { SaveTransaction } from 'ynab-client';
 import { readCache, writeCache } from './cache';
 import { getConfig } from './config';
 
@@ -44,6 +44,9 @@ const createTransation = (
   amount: number,
 ): AmazonTransaction => ({
   amount: Math.round(amount * 1000),
+  cleared: config.cleared
+    ? SaveTransaction.ClearedEnum.Cleared
+    : SaveTransaction.ClearedEnum.Uncleared,
   date: `${date.toISOString().split('T')[0]}`,
   import_id: generateImportId(
     [type, orderId, date, asinIsbn, title, seller, quantity, amount],
