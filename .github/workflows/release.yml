@@ -1,0 +1,45 @@
+name: Release
+on:
+  workflow_run:
+    workflows: ['Test']
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+
+      - name: Cache Node.js modules
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+
+      - name: Install dependencies
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        run: npm ci
+        env:
+          HUSKY_SKIP_INSTALL: 1
+
+      - name: Release
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
