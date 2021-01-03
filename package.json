@@ -1,9 +1,12 @@
 {
   "name": "amazon-ynab-sync",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sync Amazon.com orders to You Need a Budget",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "bin": {
+    "amazon-ynab-sync": "lib/index.js"
+  },
   "scripts": {
     "build": "tsc -b src",
     "clean": "rm -rf buildcache coverage lib test-output",

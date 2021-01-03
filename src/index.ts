@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
+import batch from 'it-batch';
 import { API as YnabApi } from 'ynab';
 import { getAmazonTransactions } from './amazon';
 import { makeCacheDir } from './cache';
 import { getConfig } from './config';
-import { getAccountId, getBudgetId } from './ynab';
 import logger from './logger';
-import batch from 'it-batch';
+import { getAccountId, getBudgetId } from './ynab';
 
 const config = getConfig();
 
