@@ -37,6 +37,10 @@ jobs:
         env:
           HUSKY_SKIP_INSTALL: 1
 
+      - name: Package
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        run: npm run build && npm run pkg
+
       - name: Release
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         env:
