@@ -5,4 +5,5 @@ docs
 debug
 lib
 node_modules
+pkg
 test-output
