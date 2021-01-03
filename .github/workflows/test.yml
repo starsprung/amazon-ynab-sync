@@ -4,7 +4,19 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+        node-version:
+          - 14
+          - 15
+
+    runs-on: ${{ matrix.os }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -12,7 +24,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 15.x
+          with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache Node.js modules
         uses: actions/cache@v2

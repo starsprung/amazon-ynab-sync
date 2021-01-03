@@ -19,7 +19,7 @@ jobs:
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
         uses: actions/setup-node@v1
         with:
-          node-version: 15.x
+          node-version: 14.x
 
       - name: Cache Node.js modules
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
