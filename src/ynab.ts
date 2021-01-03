@@ -71,7 +71,7 @@ export const getAccountId = async (budgetName: string, accountName: string): Pro
   return account.id;
 };
 
-export const addTransactions = async (transactions: Array<AmazonTransaction>) => {
+export const addTransactions = async (transactions: Array<AmazonTransaction>): Promise<void> => {
   const ynabApi = new YnabApi(config.ynabAccessToken);
 
   const budgetId = await getBudgetId(config.ynabBudgetName);
