@@ -1,14 +1,10 @@
 #!/usr/bin/env node
 
 import batch from 'it-batch';
-import { API as YnabApi } from 'ynab';
 import { getAmazonTransactions } from './amazon';
 import { makeCacheDir } from './cache';
-import { getConfig } from './config';
 import logger from './logger';
-import { getAccountId, getBudgetId } from './ynab';
-
-const config = getConfig();
+import { addTransactions } from './ynab';
 
 const initialize = async (): Promise<void> => {
   await makeCacheDir();
@@ -16,10 +12,6 @@ const initialize = async (): Promise<void> => {
 
 (async () => {
   await initialize();
-
-  const budgetId = await getBudgetId(config.ynabBudgetName);
-  const accountId = await getAccountId(config.ynabBudgetName, config.ynabAccountName);
-  const ynabApi = new YnabApi(config.ynabAccessToken);
 
   logger.info('Retrieving reports from Amazon');
   let count = 0;
@@ -30,12 +22,9 @@ const initialize = async (): Promise<void> => {
 
     try {
       logger.debug(`Submitting batch of ${transactionBatch.length} transactions`);
-      await ynabApi.transactions.createTransactions(budgetId, {
-        transactions: transactionBatch.map((t) => ({ ...t, account_id: accountId })),
-      });
+      await addTransactions(transactionBatch);
       count += transactionBatch.length;
     } catch (err) {
-      logger.error(`Error during YNAB API call: ${err.error?.detail ?? err.message ?? err.code}`);
       break;
     }
   }

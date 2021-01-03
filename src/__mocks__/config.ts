@@ -5,8 +5,11 @@ const mocks = {
   amazonPassword: jest.fn(() => 'pass123456'),
   amazonUsername: jest.fn(() => 'user@example.com'),
   cacheDir: jest.fn(() => '/path/to/cache/'),
+  cleared: jest.fn(() => true),
   logLevel: jest.fn(() => 'none'),
   ynabAccessToken: jest.fn(() => 'f82918ba-4aa7-4805-b9be-fe5e87eaacf3'),
+  ynabAccountName: jest.fn(() => 'Amazon.com'),
+  ynabBudgetName: jest.fn(() => 'Budget'),
 };
 
 const config = Object.defineProperties(

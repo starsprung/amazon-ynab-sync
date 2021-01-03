@@ -10,7 +10,6 @@ import {
   mocks as amazonOrderReportsApiMocks,
 } from './__mocks__/amazon-order-reports-api';
 
-jest.mock('amazon-order-reports-api');
 jest.mock('inquirer');
 jest.mock('./cache');
 jest.mock('./config');
@@ -108,6 +107,7 @@ describe('amazon', () => {
       expect(result).toEqual([
         {
           amount: -21750,
+          cleared: 'cleared',
           date: '2020-01-03',
           import_id: '6128e2d42a9b71f2680e46bd90c53fcdb8fe',
           memo: 'Some Product',
@@ -115,6 +115,7 @@ describe('amazon', () => {
         },
         {
           amount: 75980,
+          cleared: 'cleared',
           date: '2020-01-14',
           import_id: '9b026229af8f0894ddcd8b575d28859e7357',
           memo: '2 x Some kind of coat',
@@ -122,12 +123,25 @@ describe('amazon', () => {
         },
         {
           amount: 75980,
+          cleared: 'cleared',
           date: '2020-01-14',
           import_id: '113728ab6700037b5a466b9b01dd0806f26c',
           memo: '2 x Some kind of coat',
           payee_name: 'A Seller',
         },
       ]);
+    });
+
+    it('should respect cleared configuration', async () => {
+      const config = getConfig();
+      jest.spyOn(config, 'cleared', 'get').mockReturnValueOnce(false);
+
+      const result: Array<AmazonTransaction> = [];
+      for await (const transaction of getAmazonTransactions()) {
+        result.push(transaction);
+      }
+
+      expect(result[0]).toHaveProperty('cleared', 'uncleared');
     });
 
     it('should use different import_ids for identical items', async () => {
