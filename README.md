@@ -27,7 +27,7 @@ On some systems if you're installing to a privileged location you may need:
 sudo npm install -g amazon-ynab-sync --unsafe-perm=true
 ```
 
-Ensure you have you Node.js `bin` directory in your environment path.
+Ensure you have the Node.js `bin` directory in your environment path.
 
 ## Usage
 
