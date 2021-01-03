@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.1.0...v1.2.0) (2021-01-03)
+
+
+### Features
+
+* run on node 14 ([#7](https://github.com/starsprung/amazon-ynab-sync/issues/7)) ([9a8522d](https://github.com/starsprung/amazon-ynab-sync/commit/9a8522de604901424a9a8dacb6b67901085dd038))
+
 # [1.1.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.0.2...v1.1.0) (2021-01-03)
 
 
