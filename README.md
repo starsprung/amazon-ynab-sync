@@ -65,7 +65,7 @@ Ensure you have created a budget and an unlinked account in YNAB in which you wa
 ### Basic usage
 
 ```
-❯ amazon-ynab-sync \
+amazon-ynab-sync \
 --ynab-access-token 437e0a95e9ce155e5dea5b62b5305988cac9f4664f480650cc18d3327cae36ec \
 --ynab-budget-name "My Budget" \
 --ynab-account-name "Amazon.com" \
@@ -84,7 +84,7 @@ when the Amazon.com login session expires.
 It's possible to provide your Amazon.com credentials as parameters via CLI options or environment variables. In general
 it's not secure to provide your password directly in clear text, as they may be logged in your shell history, but many password
 managers such as [LastPass](https://github.com/lastpass/lastpass-cli) or [1Password](https://1password.com/downloads/command-line/)
-have a CLI tool that can be used to provide the the login credentials.
+have a CLI tool that can be used to provide the login credentials.
 
 #### LastPass
 
