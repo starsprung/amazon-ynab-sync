@@ -1,6 +1,6 @@
 {
   "name": "amazon-ynab-sync",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Sync Amazon.com orders to You Need a Budget",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
