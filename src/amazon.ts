@@ -21,7 +21,10 @@ const getPassword = async (): Promise<string> =>
 const getOtpCode = async (): Promise<string> =>
   config.amazonOtpCode ?? (await prompt('Amazon OTP Code:'));
 
-const generateImportId = (idInputs: Array<string | number | Date>, seenIds: IdRecord): string => {
+const generateImportId = (
+  idInputs: Array<string | number | Date | undefined>,
+  seenIds: IdRecord,
+): string => {
   const baseHash = hasha(
     idInputs.map((v) => `${v instanceof Date ? v.toISOString() : v}`),
     { algorithm: 'sha256' },
@@ -35,14 +38,24 @@ const generateImportId = (idInputs: Array<string | number | Date>, seenIds: IdRe
 
 const createTransation = (
   seenIds: IdRecord,
-  type: 'item' | 'refund',
-  orderId: string,
-  date: Date,
-  asinIsbn: string,
-  title: string,
-  seller: string,
-  quantity: number,
-  amount: number,
+  type: 'item' | 'refund' | 'shipping',
+  {
+    orderId,
+    date,
+    asinIsbn,
+    title,
+    seller,
+    quantity,
+    amount,
+  }: {
+    orderId: string;
+    date: Date;
+    asinIsbn?: string;
+    title?: string;
+    seller?: string;
+    quantity?: number;
+    amount: number;
+  },
 ): AmazonTransaction => ({
   amount: Math.round(amount * 1000),
   cleared: config.cleared
@@ -53,8 +66,13 @@ const createTransation = (
     [type, orderId, date, asinIsbn, title, seller, quantity, amount],
     seenIds,
   ),
-  memo: title ? `${quantity > 1 ? `${quantity} x ` : ''}${title}`.substr(0, 200) : '',
-  payee_name: seller,
+  memo:
+    type === 'shipping'
+      ? `Shipping for ${orderId}`
+      : title
+      ? `${(quantity ?? 0) > 1 ? `${quantity} x ` : ''}${title}`.substr(0, 200)
+      : '',
+  payee_name: seller ?? 'Amazon.com',
 });
 
 export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTransaction> {
@@ -80,36 +98,45 @@ export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTr
       endDate: new Date(),
     })) {
       if (item.itemTotal) {
-        yield createTransation(
-          seenIds,
-          'item',
-          item.orderId,
-          item.orderDate,
-          item.asinIsbn,
-          item.title,
-          item.seller,
-          item.quantity,
-          -item.itemTotal,
-        );
+        yield createTransation(seenIds, 'item', {
+          orderId: item.orderId,
+          date: item.orderDate,
+          asinIsbn: item.asinIsbn,
+          title: item.title,
+          seller: item.seller,
+          quantity: item.quantity,
+          amount: -item.itemTotal,
+        });
       }
     }
 
-    for await (const refund of api.getRefunds({
+    for await (const item of api.getRefunds({
       startDate: new Date(config.startDate),
       endDate: new Date(),
     })) {
-      if (refund.refundAmount) {
-        yield createTransation(
-          seenIds,
-          'refund',
-          refund.orderId,
-          refund.orderDate,
-          refund.asinIsbn,
-          refund.title,
-          refund.seller,
-          refund.quantity,
-          refund.refundAmount,
-        );
+      if (item.refundAmount) {
+        yield createTransation(seenIds, 'refund', {
+          orderId: item.orderId,
+          date: item.orderDate,
+          asinIsbn: item.asinIsbn,
+          title: item.title,
+          seller: item.seller,
+          quantity: item.quantity,
+          amount: item.refundAmount,
+        });
+      }
+    }
+
+    for await (const item of api.getShipments({
+      startDate: new Date(config.startDate),
+      endDate: new Date(),
+    })) {
+      if (item.shippingCharge) {
+        yield createTransation(seenIds, 'shipping', {
+          orderId: item.orderId,
+          date: item.orderDate,
+          amount: -item.shippingCharge,
+        });
       }
     }
   } finally {

@@ -1,4 +1,4 @@
-import { OrderItem, Refund } from 'amazon-order-reports-api';
+import { OrderItem, Refund, Shipment } from 'amazon-order-reports-api';
 import inquirer from 'inquirer';
 import mockdate from 'mockdate';
 import { mocked } from 'ts-jest/utils';
@@ -96,6 +96,33 @@ describe('amazon', () => {
           } as Refund,
         ];
       });
+
+      mocked(amazonOrderReportsApiMocks).getShipments.mockImplementationOnce(async function* () {
+        yield* [
+          {
+            buyerName: 'Test Man',
+            carrierNameTrackingNumber: 'FEDEX(536485026870)',
+            orderDate: new Date('2020-02-22T08:00:00.000Z'),
+            orderId: '112-1234569-3333333',
+            orderStatus: 'Shipped',
+            orderingCustomerEmail: 'test@example.com',
+            paymentInstrumentType: 'American Express - 1236',
+            shipmentDate: new Date('2020-02-23T08:00:00.000Z'),
+            shippingAddressCity: 'Washington',
+            shippingAddressName: 'Test Man',
+            shippingAddressState: 'DC',
+            shippingAddressStreet1: '1600 Pennsylvania Avenue NW',
+            shippingAddressZip: '20500',
+            shippingCharge: 17.99,
+            subtotal: 489.95,
+            taxBeforePromotions: 0,
+            taxCharged: 0,
+            totalCharged: 507.94,
+            totalPromotions: 0,
+            website: 'Amazon.com',
+          } as Shipment,
+        ];
+      });
     });
 
     it('should return transactions from amazon', async () => {
@@ -128,6 +155,14 @@ describe('amazon', () => {
           import_id: '113728ab6700037b5a466b9b01dd0806f26c',
           memo: '2 x Some kind of coat',
           payee_name: 'A Seller',
+        },
+        {
+          amount: -17990,
+          cleared: 'cleared',
+          date: '2020-02-22',
+          import_id: '58b86c94e423511cc8791c294f574c51f5e6',
+          memo: 'Shipping for 112-1234569-3333333',
+          payee_name: 'Amazon.com',
         },
       ]);
     });
