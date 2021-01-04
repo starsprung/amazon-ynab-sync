@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.3.4...v1.4.0) (2021-01-04)
+
+
+### Features
+
+* import shipping charges ([84a28ec](https://github.com/starsprung/amazon-ynab-sync/commit/84a28ec9c0b2bf0a6c91256c7f5479e8349da7ab))
+
 ## [1.3.4](https://github.com/starsprung/amazon-ynab-sync/compare/v1.3.3...v1.3.4) (2021-01-04)
 
 ## [1.3.3](https://github.com/starsprung/amazon-ynab-sync/compare/v1.3.2...v1.3.3) (2021-01-04)
