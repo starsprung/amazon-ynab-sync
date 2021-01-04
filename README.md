@@ -12,12 +12,30 @@ functionality, which generates e-mails from Amazon, [see below](#email-notificat
 
 ## Pre-requisites
 
-- [Node.js](https://nodejs.org/) >= 14.15.0
 - [Your YNAB personal access token](https://api.youneedabudget.com/#personal-access-tokens)
 - Your Amazon.com login credentials
-- On Linux some Puppeteer dependencies [may need to be manually installed](#troubleshooting)
+- On Linux, some Puppeteer dependencies [may need to be manually installed](#troubleshooting)
 
 ## Installation
+
+### As a pre-built binary
+
+Pre-built binaries for Linux, macOS and Windows can be downloaded from the
+[releases page](https://github.com/starsprung/amazon-ynab-sync/releases/). Simply extract
+them and run the binary on the command line.
+
+These binaries are packaged with Node.js, so there is no need to download that separately.
+They do not include Chromium, but that will be downloaded automatically when the application
+is run for the first time.
+
+### As an NPM package
+
+#### Pre-requisites
+
+- [Node.js](https://nodejs.org/) >= 14.4.0
+- npm >= 6.9.0
+
+#### Install
 
 ```
 npm install -g amazon-ynab-sync

@@ -15,7 +15,7 @@
     "docs": "typedoc",
     "lint": "eslint src",
     "pkg": "for PLATFORM in macos linux win; do pkg -t \"node14-${PLATFORM}-x64\" --out-path \"pkg/${npm_package_name}-${PLATFORM}\" .; done",
-    "postpkg": "for PKG in pkg/*; do tar czf \"${PKG}.tar.gz\" \"${PKG}\"; zip -r \"${PKG}.zip\" \"${PKG}\"; done",
+    "postpkg": "cd pkg && for PKG in *; do tar czf \"${PKG}.tar.gz\" \"${PKG}\"; zip -r \"${PKG}.zip\" \"${PKG}\"; done",
     "prepack": "npm run clean && npm run build",
     "postpack": "npm run pkg",
     "start": "node lib/index.js",
@@ -88,7 +88,13 @@
   },
   "release": {
     "plugins": [
-      "@semantic-release/commit-analyzer",
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": "./semantic-release-rules.js"
+        }
+      ],
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
       "@semantic-release/npm",
