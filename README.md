@@ -33,6 +33,7 @@ is run for the first time.
 #### Pre-requisites
 
 - [Node.js](https://nodejs.org/) >= 14.4.0
+- npm >= 6.9.0
 
 #### Install
 
