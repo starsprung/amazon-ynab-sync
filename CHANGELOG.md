@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/starsprung/amazon-ynab-sync/compare/v1.3.0...v1.3.1) (2021-01-04)
+
+
+### Bug Fixes
+
+* fix pre-built binaries ([9eec42a](https://github.com/starsprung/amazon-ynab-sync/commit/9eec42ae350343196c4bb03dfa082ef668a9f891))
+
 ## [1.3.1](https://github.com/starsprung/amazon-ynab-sync/compare/v1.3.0...v1.3.1) (2021-01-03)
 
 
