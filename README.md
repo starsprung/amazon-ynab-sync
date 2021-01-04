@@ -65,13 +65,15 @@ Ensure you have created a budget and an unlinked account in YNAB in which you wa
 ### Basic usage
 
 ```
-❯ amazon-ynab-sync --ynab-access-token 437e0a95e9ce155e5dea5b62b5305988cac9f4664f480650cc18d3327cae36ec --ynab-budget-name "My Budget" --ynab-account-name "Amazon.com"
-{"level":"info","message":"Retrieving reports from Amazon","metadata":{},"timestamp":"2021-01-03T06:05:11.621Z"}
+❯ amazon-ynab-sync \
+--ynab-access-token 437e0a95e9ce155e5dea5b62b5305988cac9f4664f480650cc18d3327cae36ec \
+--ynab-budget-name "My Budget" \
+--ynab-account-name "Amazon.com" \
+--log-level none
+
 ? Amazon Username: test@example.com
 ? Amazon Password: [hidden]
 ? Amazon OTP Code: 123456
-{"level":"info","message":"Submitting transations to YNAB","metadata":{},"timestamp":"2021-01-03T06:05:49.514Z"}
-{"level":"info","message":"Submitted 24 transations to YNAB","metadata":{},"timestamp":"2021-01-03T06:05:50.390Z"}
 ```
 
 After the initial login the application will store the cookies provided by Amazon and will only re-prompt for credentials
