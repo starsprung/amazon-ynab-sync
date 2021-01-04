@@ -14,7 +14,7 @@ functionality, which generates e-mails from Amazon, [see below](#email-notificat
 
 - [Your YNAB personal access token](https://api.youneedabudget.com/#personal-access-tokens)
 - Your Amazon.com login credentials
-- On Linux some Puppeteer dependencies [may need to be manually installed](#troubleshooting)
+- On Linux, some Puppeteer dependencies [may need to be manually installed](#troubleshooting)
 
 ## Installation
 
