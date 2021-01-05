@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.2...v1.4.3) (2021-01-05)
+
+
+### Bug Fixes
+
+* fix error when report has no data ([7848e92](https://github.com/starsprung/amazon-ynab-sync/commit/7848e927a625151161d745aa5207ffb746ffb33d)), closes [#13](https://github.com/starsprung/amazon-ynab-sync/issues/13)
+
 ## [1.4.2](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.1...v1.4.2) (2021-01-05)
 
 ## [1.4.1](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.0...v1.4.1) (2021-01-05)
