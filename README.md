@@ -79,12 +79,13 @@ amazon-ynab-sync \
 After the initial login the application will store the cookies provided by Amazon and will only re-prompt for credentials
 when the Amazon.com login session expires.
 
-### Providing Amazon.com login credential non-interactively
+### Providing login credentials non-interactively
 
 It's possible to provide your Amazon.com credentials as parameters via CLI options or environment variables. In general
 it's not secure to provide your password directly in clear text, as they may be logged in your shell history, but many password
 managers such as [LastPass](https://github.com/lastpass/lastpass-cli) or [1Password](https://1password.com/downloads/command-line/)
-have a CLI tool that can be used to provide the login credentials.
+have a CLI tool that can be used to provide the login credentials. You could also save your YNAB personal access token in a password
+manager to improve security.
 
 #### LastPass
 
