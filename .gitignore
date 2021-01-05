@@ -4,6 +4,7 @@ coverage
 docs
 debug
 lib
+licenses
 node_modules
 pkg
 test-output
