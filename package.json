@@ -32,7 +32,7 @@
     "npm": ">=6.9.0"
   },
   "dependencies": {
-    "amazon-order-reports-api": "^3.3.1",
+    "amazon-order-reports-api": "^3.3.2",
     "env-paths": "^2.2.0",
     "hasha": "^5.2.2",
     "inquirer": "^6.5.2",
