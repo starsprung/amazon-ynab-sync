@@ -4,6 +4,7 @@ import batch from 'it-batch';
 import { getAmazonTransactions } from './amazon';
 import { makeCacheDir } from './cache';
 import logger from './logger';
+import supportNotice from './support-notice';
 import { addTransactions } from './ynab';
 
 const initialize = async (): Promise<void> => {
@@ -11,6 +12,7 @@ const initialize = async (): Promise<void> => {
 };
 
 (async () => {
+  supportNotice();
   await initialize();
 
   logger.info('Retrieving reports from Amazon');
