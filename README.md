@@ -10,6 +10,10 @@ Internally, this runs a headless instance of [Chromium](https://www.chromium.org
 to login to your Amazon account, retrieve your transations and submits them to YNAB using the YNAB API. This utilizes Amazon's Order History Reports
 functionality, which generates e-mails from Amazon, [see below](#email-notifications) a suggestion for handling these.
 
+## Support this project
+
+If you'd like to support this project, please consider donating to the [Oregon Food Bank](https://give.oregonfoodbank.org/give/92782/). If you donate more than $50 and [send me a screenshot of your donation](mailto:s@starsprung.com), I'd add you to a list of supporters!
+
 ## Pre-requisites
 
 - [Your YNAB personal access token](https://api.youneedabudget.com/#personal-access-tokens)
