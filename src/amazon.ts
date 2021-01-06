@@ -38,7 +38,7 @@ const generateImportId = (
 
 const createTransation = (
   seenIds: IdRecord,
-  type: 'item' | 'refund' | 'shipping',
+  type: 'item' | 'refund' | 'shipping' | 'promotion',
   {
     orderId,
     date,
@@ -69,6 +69,8 @@ const createTransation = (
   memo:
     type === 'shipping'
       ? `Shipping for ${orderId}`
+      : type === 'promotion'
+      ? `Promotion for ${orderId}`
       : title
       ? `${(quantity ?? 0) > 1 ? `${quantity} x ` : ''}${title}`.substr(0, 200)
       : '',
@@ -136,6 +138,14 @@ export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTr
           orderId: item.orderId,
           date: item.orderDate,
           amount: -item.shippingCharge,
+        });
+      }
+
+      if (item.totalPromotions) {
+        yield createTransation(seenIds, 'promotion', {
+          orderId: item.orderId,
+          date: item.orderDate,
+          amount: item.totalPromotions,
         });
       }
     }

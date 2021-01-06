@@ -118,7 +118,7 @@ describe('amazon', () => {
             taxBeforePromotions: 0,
             taxCharged: 0,
             totalCharged: 507.94,
-            totalPromotions: 0,
+            totalPromotions: 10.51,
             website: 'Amazon.com',
           } as Shipment,
         ];
@@ -162,6 +162,14 @@ describe('amazon', () => {
           date: '2020-02-22',
           import_id: '58b86c94e423511cc8791c294f574c51f5e6',
           memo: 'Shipping for 112-1234569-3333333',
+          payee_name: 'Amazon.com',
+        },
+        {
+          amount: 10510,
+          cleared: 'cleared',
+          date: '2020-02-22',
+          import_id: 'ab178dd06eeec28f129b1988305e0d4ee01d',
+          memo: 'Promotion for 112-1234569-3333333',
           payee_name: 'Amazon.com',
         },
       ]);
