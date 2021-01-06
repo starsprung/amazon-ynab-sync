@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.3...v1.4.4) (2021-01-06)
+
+
+### Bug Fixes
+
+* reflect promotions on an order as a separate transaction ([c19c1e8](https://github.com/starsprung/amazon-ynab-sync/commit/c19c1e8c848e785c4c832b09237e57417ff5bc9f)), closes [#11](https://github.com/starsprung/amazon-ynab-sync/issues/11)
+
 ## [1.4.3](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.2...v1.4.3) (2021-01-05)
 
 
