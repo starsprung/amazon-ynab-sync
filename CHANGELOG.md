@@ -1,3 +1,10 @@
+## [1.4.7](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.6...v1.4.7) (2021-01-06)
+
+
+### Bug Fixes
+
+* add email address to support notice ([f979f1d](https://github.com/starsprung/amazon-ynab-sync/commit/f979f1d8382117c134294a4885988d2051dc0246))
+
 ## [1.4.6](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.5...v1.4.6) (2021-01-06)
 
 ## [1.4.5](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.4...v1.4.5) (2021-01-06)
