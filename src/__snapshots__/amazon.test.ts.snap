@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`amazon getAmazonTransactions should handle unaccounted for adjustments 1`] = `
+Array [
+  Object {
+    "amount": -23750,
+    "cleared": "cleared",
+    "date": "2020-01-04",
+    "import_id": "075048d916825036a0e29dfae3ec77702be3",
+    "memo": "Another Product",
+    "payee_name": "This Is A Seller",
+  },
+  Object {
+    "amount": -2500,
+    "cleared": "cleared",
+    "date": "2020-01-04",
+    "import_id": "31e1b15b3ef2c0923e6f9bfb4db707e36d7f",
+    "memo": "Shipping for 123-7654321-1234568",
+    "payee_name": "Amazon.com",
+  },
+  Object {
+    "amount": 1000,
+    "cleared": "cleared",
+    "date": "2020-01-04",
+    "import_id": "9f796daf73a1963c7fd02bbf4dce613abae7",
+    "memo": "Promotion for 123-7654321-1234568",
+    "payee_name": "Amazon.com",
+  },
+  Object {
+    "amount": -1750,
+    "cleared": "cleared",
+    "date": "2020-01-04",
+    "import_id": "070a213531d829c843df6e25e23e8a7e6c2a",
+    "memo": "Misc adjustment for 123-7654321-1234568",
+    "payee_name": "Amazon.com",
+  },
+]
+`;
+
+exports[`amazon getAmazonTransactions should return transactions from amazon 1`] = `
+Array [
+  Object {
+    "amount": -21750,
+    "cleared": "cleared",
+    "date": "2020-01-03",
+    "import_id": "6128e2d42a9b71f2680e46bd90c53fcdb8fe",
+    "memo": "Some Product",
+    "payee_name": "This Is A Seller",
+  },
+  Object {
+    "amount": 75980,
+    "cleared": "cleared",
+    "date": "2020-01-14",
+    "import_id": "9b026229af8f0894ddcd8b575d28859e7357",
+    "memo": "2 x Some kind of coat",
+    "payee_name": "A Seller",
+  },
+  Object {
+    "amount": 75980,
+    "cleared": "cleared",
+    "date": "2020-01-14",
+    "import_id": "113728ab6700037b5a466b9b01dd0806f26c",
+    "memo": "2 x Some kind of coat",
+    "payee_name": "A Seller",
+  },
+  Object {
+    "amount": -17990,
+    "cleared": "cleared",
+    "date": "2020-02-22",
+    "import_id": "58b86c94e423511cc8791c294f574c51f5e6",
+    "memo": "Shipping for 112-1234569-3333333",
+    "payee_name": "Amazon.com",
+  },
+  Object {
+    "amount": 10510,
+    "cleared": "cleared",
+    "date": "2020-02-22",
+    "import_id": "ab178dd06eeec28f129b1988305e0d4ee01d",
+    "memo": "Promotion for 112-1234569-3333333",
+    "payee_name": "Amazon.com",
+  },
+]
+`;

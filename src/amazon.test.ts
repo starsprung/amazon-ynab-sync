@@ -131,48 +131,188 @@ describe('amazon', () => {
         result.push(transaction);
       }
 
-      expect(result).toEqual([
-        {
-          amount: -21750,
-          cleared: 'cleared',
-          date: '2020-01-03',
-          import_id: '6128e2d42a9b71f2680e46bd90c53fcdb8fe',
-          memo: 'Some Product',
-          payee_name: 'This Is A Seller',
-        },
-        {
-          amount: 75980,
-          cleared: 'cleared',
-          date: '2020-01-14',
-          import_id: '9b026229af8f0894ddcd8b575d28859e7357',
-          memo: '2 x Some kind of coat',
-          payee_name: 'A Seller',
-        },
-        {
-          amount: 75980,
-          cleared: 'cleared',
-          date: '2020-01-14',
-          import_id: '113728ab6700037b5a466b9b01dd0806f26c',
-          memo: '2 x Some kind of coat',
-          payee_name: 'A Seller',
-        },
-        {
-          amount: -17990,
-          cleared: 'cleared',
-          date: '2020-02-22',
-          import_id: '58b86c94e423511cc8791c294f574c51f5e6',
-          memo: 'Shipping for 112-1234569-3333333',
-          payee_name: 'Amazon.com',
-        },
-        {
-          amount: 10510,
-          cleared: 'cleared',
-          date: '2020-02-22',
-          import_id: 'ab178dd06eeec28f129b1988305e0d4ee01d',
-          memo: 'Promotion for 112-1234569-3333333',
-          payee_name: 'Amazon.com',
-        },
-      ]);
+      expect(result).toMatchSnapshot();
+    });
+
+    it('should handle unaccounted for adjustments', async () => {
+      mocked(amazonOrderReportsApiMocks)
+        .getItems.mockReset()
+        .mockImplementationOnce(async function* () {
+          yield* [
+            {
+              asinIsbn: 'B06Y5JDY3Q',
+              buyerName: 'Test Man',
+              carrierNameTrackingNumber: 'USPS(9300120111405739274857)',
+              category: 'HEALTH_PERSONAL_CARE',
+              condition: 'new',
+              currency: 'USD',
+              itemSubtotal: 22.75,
+              itemSubtotalTax: 1,
+              itemTotal: 23.75,
+              listPricePerUnit: 0,
+              orderDate: new Date('2020-01-04T08:00:00.000Z'),
+              orderId: '123-7654321-1234568',
+              orderStatus: 'Shipped',
+              orderingCustomerEmail: 'email@example.com',
+              paymentInstrumentType: 'Visa - 1234',
+              purchasePricePerUnit: 22.75,
+              quantity: 1,
+              seller: 'This Is A Seller',
+              shipmentDate: new Date('2020-01-07T08:00:00.000Z'),
+              shippingAddressCity: 'Washington',
+              shippingAddressName: 'Test Man',
+              shippingAddressState: 'DC',
+              shippingAddressStreet1: '1600 Pennsylvania Avenue NW',
+              shippingAddressZip: '20500',
+              title: 'Another Product',
+              unspscCode: '38462847',
+              website: 'Amazon.com',
+            } as OrderItem,
+          ];
+        });
+
+      mocked(amazonOrderReportsApiMocks.getRefunds).mockReset().mockReturnValueOnce([]);
+
+      mocked(amazonOrderReportsApiMocks)
+        .getShipments.mockReset()
+        .mockImplementationOnce(async function* () {
+          yield* [
+            {
+              buyerName: 'Test Man',
+              carrierNameTrackingNumber: 'FEDEX(536485026870)',
+              orderDate: new Date('2020-01-04T08:00:00.000Z'),
+              orderId: '123-7654321-1234568',
+              orderStatus: 'Shipped',
+              orderingCustomerEmail: 'test@example.com',
+              paymentInstrumentType: 'American Express - 1236',
+              shipmentDate: new Date('2020-01-07T08:00:00.000Z'),
+              shippingAddressCity: 'Washington',
+              shippingAddressName: 'Test Man',
+              shippingAddressState: 'DC',
+              shippingAddressStreet1: '1600 Pennsylvania Avenue NW',
+              shippingAddressZip: '20500',
+              shippingCharge: 2.5,
+              subtotal: 22.75,
+              taxBeforePromotions: 1,
+              taxCharged: 1,
+              totalCharged: 27,
+              totalPromotions: 1,
+              website: 'Amazon.com',
+            } as Shipment,
+          ];
+        });
+
+      const result: Array<AmazonTransaction> = [];
+      for await (const transaction of getAmazonTransactions()) {
+        result.push(transaction);
+      }
+
+      expect(result).toMatchSnapshot();
+    });
+
+    it('should not have misc adjustment if order is not complete', async () => {
+      mocked(amazonOrderReportsApiMocks)
+        .getItems.mockReset()
+        .mockImplementationOnce(async function* () {
+          yield* [
+            {
+              asinIsbn: 'B06Y5JDY3Q',
+              buyerName: 'Test Man',
+              carrierNameTrackingNumber: 'USPS(9300120111405739274857)',
+              category: 'HEALTH_PERSONAL_CARE',
+              condition: 'new',
+              currency: 'USD',
+              itemSubtotal: 22.75,
+              itemSubtotalTax: 1,
+              itemTotal: 23.75,
+              listPricePerUnit: 0,
+              orderDate: new Date('2020-01-04T08:00:00.000Z'),
+              orderId: '123-7654321-1234568',
+              orderStatus: 'Shipped',
+              orderingCustomerEmail: 'email@example.com',
+              paymentInstrumentType: 'Visa - 1234',
+              purchasePricePerUnit: 22.75,
+              quantity: 1,
+              seller: 'This Is A Seller',
+              shipmentDate: new Date('2020-01-07T08:00:00.000Z'),
+              shippingAddressCity: 'Washington',
+              shippingAddressName: 'Test Man',
+              shippingAddressState: 'DC',
+              shippingAddressStreet1: '1600 Pennsylvania Avenue NW',
+              shippingAddressZip: '20500',
+              title: 'Another Product',
+              unspscCode: '38462847',
+              website: 'Amazon.com',
+            } as OrderItem,
+            {
+              asinIsbn: 'B06Y5JDY7U',
+              buyerName: 'Test Man',
+              carrierNameTrackingNumber: 'USPS(9300120111405739274857)',
+              category: 'HEALTH_PERSONAL_CARE',
+              condition: 'new',
+              currency: 'USD',
+              itemSubtotal: 25.0,
+              itemSubtotalTax: 0,
+              itemTotal: 25.0,
+              listPricePerUnit: 0,
+              orderDate: new Date('2020-01-04T08:00:00.000Z'),
+              orderId: '123-7654321-1234568',
+              orderStatus: 'Shipped',
+              orderingCustomerEmail: 'email@example.com',
+              paymentInstrumentType: 'Visa - 1234',
+              purchasePricePerUnit: 25,
+              quantity: 1,
+              seller: 'This Is A Seller',
+              shipmentDate: new Date('2020-01-07T08:00:00.000Z'),
+              shippingAddressCity: 'Washington',
+              shippingAddressName: 'Test Man',
+              shippingAddressState: 'DC',
+              shippingAddressStreet1: '1600 Pennsylvania Avenue NW',
+              shippingAddressZip: '20500',
+              title: 'Another Product 2',
+              unspscCode: '38462847',
+              website: 'Amazon.com',
+            } as OrderItem,
+          ];
+        });
+
+      mocked(amazonOrderReportsApiMocks.getRefunds).mockReset().mockReturnValueOnce([]);
+
+      mocked(amazonOrderReportsApiMocks)
+        .getShipments.mockReset()
+        .mockImplementationOnce(async function* () {
+          yield* [
+            {
+              buyerName: 'Test Man',
+              carrierNameTrackingNumber: 'FEDEX(536485026870)',
+              orderDate: new Date('2020-01-04T08:00:00.000Z'),
+              orderId: '123-7654321-1234568',
+              orderStatus: 'Shipped',
+              orderingCustomerEmail: 'test@example.com',
+              paymentInstrumentType: 'American Express - 1236',
+              shipmentDate: new Date('2020-01-07T08:00:00.000Z'),
+              shippingAddressCity: 'Washington',
+              shippingAddressName: 'Test Man',
+              shippingAddressState: 'DC',
+              shippingAddressStreet1: '1600 Pennsylvania Avenue NW',
+              shippingAddressZip: '20500',
+              shippingCharge: 0,
+              subtotal: 22.75,
+              taxBeforePromotions: 1,
+              taxCharged: 1,
+              totalCharged: 27,
+              totalPromotions: 0,
+              website: 'Amazon.com',
+            } as Shipment,
+          ];
+        });
+
+      const result: Array<AmazonTransaction> = [];
+      for await (const transaction of getAmazonTransactions()) {
+        result.push(transaction);
+      }
+
+      expect(result.some((transaction) => transaction.memo?.includes('Misc')));
     });
 
     it('should respect cleared configuration', async () => {
