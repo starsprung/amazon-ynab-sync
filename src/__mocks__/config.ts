@@ -8,6 +8,7 @@ const mocks = {
   cacheDir: jest.fn(() => normalize('/path/to/cache/')),
   cleared: jest.fn(() => true),
   logLevel: jest.fn(() => 'none'),
+  payee: jest.fn(() => undefined),
   ynabAccessToken: jest.fn(() => 'f82918ba-4aa7-4805-b9be-fe5e87eaacf3'),
   ynabAccountName: jest.fn(() => 'Amazon.com'),
   ynabBudgetName: jest.fn(() => 'Budget'),

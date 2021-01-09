@@ -16,6 +16,7 @@ export interface Config {
   cleared: boolean;
   debugMode: boolean;
   logLevel: string;
+  payee: string;
   startDate: string;
   ynabBudgetName: string;
   ynabAccountName: string;
@@ -87,6 +88,10 @@ export const getConfig = (): Config => {
         choices: ['debug', 'info', 'error', 'none', 'silly'],
         default: 'info',
         describe: 'Level of logs to output',
+        type: 'string',
+      })
+      .option('payee', {
+        describe: 'Override the "Payee" field in YNAB with this value',
         type: 'string',
       })
       .options('start-date', {
