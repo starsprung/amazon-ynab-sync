@@ -327,6 +327,18 @@ describe('amazon', () => {
       expect(result[0]).toHaveProperty('cleared', 'uncleared');
     });
 
+    it('should respect payee configuration', async () => {
+      const config = getConfig();
+      jest.spyOn(config, 'payee', 'get').mockReturnValueOnce('Test Payee');
+
+      const result: Array<AmazonTransaction> = [];
+      for await (const transaction of getAmazonTransactions()) {
+        result.push(transaction);
+      }
+
+      expect(result[0]).toHaveProperty('payee_name', 'Test Payee');
+    });
+
     it('should use different import_ids for identical items', async () => {
       const result: Array<AmazonTransaction> = [];
       for await (const transaction of getAmazonTransactions()) {

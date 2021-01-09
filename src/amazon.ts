@@ -78,7 +78,7 @@ const createTransation = (
       : title
       ? `${(quantity ?? 0) > 1 ? `${quantity} x ` : ''}${title}`.substr(0, 200)
       : '',
-  payee_name: seller ?? 'Amazon.com',
+  payee_name: config.payee ?? seller ?? 'Amazon.com',
 });
 
 export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTransaction> {
