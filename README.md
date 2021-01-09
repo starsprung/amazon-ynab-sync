@@ -12,7 +12,7 @@ functionality, which generates e-mails from Amazon, [see below](#email-notificat
 
 ## Support this project
 
-If you'd like to support this project, please consider donating to the [Oregon Food Bank](https://oregonfoodbank.org/donate). Donate more than $50 and [send me a screenshot of your donation](mailto:s@starsprung.com) and I'll add you to a list of supporters!
+If you'd like to support this project, please consider donating to the [Oregon Food Bank](https://oregonfoodbank.org/donate). Donate more than $50 and [send me a screenshot of your donation](mailto:s@starsprung.com) and I'll add you to a [list of supporters](SUPPORTERS.md)!
 
 ## Pre-requisites
 
