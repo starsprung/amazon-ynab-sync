@@ -1,3 +1,10 @@
+## [1.4.8](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.7...v1.4.8) (2021-01-09)
+
+
+### Bug Fixes
+
+* **amazon.ts:** account for missing miscellaneous ajustments (e.g. gift wrapping) ([6d7dba4](https://github.com/starsprung/amazon-ynab-sync/commit/6d7dba4bc0f705ed209a8ae833e3b1f56dfa320e)), closes [#20](https://github.com/starsprung/amazon-ynab-sync/issues/20)
+
 ## [1.4.7](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.6...v1.4.7) (2021-01-06)
 
 
