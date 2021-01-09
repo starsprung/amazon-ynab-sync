@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.8...v1.5.0) (2021-01-09)
+
+
+### Features
+
+* add --payee option ([86da1a6](https://github.com/starsprung/amazon-ynab-sync/commit/86da1a68b4994bd389d82d0f43238096af975f78)), closes [#21](https://github.com/starsprung/amazon-ynab-sync/issues/21)
+
 ## [1.4.8](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.7...v1.4.8) (2021-01-09)
 
 
