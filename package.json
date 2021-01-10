@@ -2,6 +2,11 @@
   "name": "amazon-ynab-sync",
   "version": "1.4.7",
   "description": "Sync Amazon.com orders to You Need a Budget",
+  "keywords": [
+    "ynab",
+    "youneedabudget",
+    "amazon"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
