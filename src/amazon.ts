@@ -6,6 +6,7 @@ import { readCache, writeCache } from './cache';
 import { getConfig } from './config';
 import { getPuppeteerExecutable } from './puppeteer';
 import get from 'lodash.get';
+import logger from './logger';
 
 const config = getConfig();
 
@@ -58,28 +59,34 @@ const createTransation = (
     quantity?: number;
     amount: number;
   },
-): AmazonTransaction => ({
-  amount: Math.round(amount * 1000),
-  cleared: config.cleared
-    ? SaveTransaction.ClearedEnum.Cleared
-    : SaveTransaction.ClearedEnum.Uncleared,
-  date: `${date.toISOString().split('T')[0]}`,
-  import_id: generateImportId(
-    [type, orderId, date, asinIsbn, title, seller, quantity, amount],
-    seenIds,
-  ),
-  memo:
-    type === 'shipping'
-      ? `Shipping for ${orderId}`
-      : type === 'promotion'
-      ? `Promotion for ${orderId}`
-      : type === 'misc'
-      ? `Misc adjustment for ${orderId}`
-      : title
-      ? `${(quantity ?? 0) > 1 ? `${quantity} x ` : ''}${title}`.substr(0, 200)
-      : '',
-  payee_name: config.payee ?? seller ?? 'Amazon.com',
-});
+): AmazonTransaction => {
+  const t = {
+    amount: Math.round(amount * 1000),
+    cleared: config.cleared
+      ? SaveTransaction.ClearedEnum.Cleared
+      : SaveTransaction.ClearedEnum.Uncleared,
+    date: `${date.toISOString().split('T')[0]}`,
+    import_id: generateImportId(
+      [type, orderId, date, asinIsbn, title, seller, quantity, amount],
+      seenIds,
+    ),
+    memo:
+      type === 'shipping'
+        ? `Shipping for ${orderId}`
+        : type === 'promotion'
+        ? `Promotion for ${orderId}`
+        : type === 'misc'
+        ? `Misc adjustment for ${orderId}`
+        : title
+        ? `${(quantity ?? 0) > 1 ? `${quantity} x ` : ''}${title}`.substr(0, 200)
+        : '',
+    payee_name: config.payee ?? seller ?? 'Amazon.com',
+  };
+
+  logger.silly('Transaction', t);
+
+  return t;
+};
 
 export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTransaction> {
   const seenIds: IdRecord = {};
