@@ -1,3 +1,5 @@
+## [1.5.1](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.0...v1.5.1) (2021-01-10)
+
 # [1.5.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.8...v1.5.0) (2021-01-09)
 
 
