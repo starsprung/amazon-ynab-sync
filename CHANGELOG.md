@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.1...v1.5.2) (2021-01-14)
+
+
+### Bug Fixes
+
+* fix lodash.get dependency ([46a90b6](https://github.com/starsprung/amazon-ynab-sync/commit/46a90b64a0531a0aeae725872cd9acba3536b5fb))
+
 ## [1.5.1](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.0...v1.5.1) (2021-01-10)
 
 # [1.5.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.4.8...v1.5.0) (2021-01-09)
