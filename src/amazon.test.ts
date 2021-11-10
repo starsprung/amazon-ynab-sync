@@ -89,7 +89,7 @@ describe('amazon', () => {
             refundCondition: 'Completed',
             refundDate: new Date('2020-01-25T08:00:00.000Z'),
             refundReason: 'Customer Return',
-            refundTaxAmount: 0,
+            refundTaxAmount: 4.2,
             seller: 'A Seller',
             title: 'Some kind of coat',
             website: 'Amazon.com',

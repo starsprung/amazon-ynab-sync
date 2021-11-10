@@ -56,10 +56,10 @@ Array [
     "payee_name": "A Seller",
   },
   Object {
-    "amount": 75980,
+    "amount": 80180,
     "cleared": "cleared",
     "date": "2020-01-14",
-    "import_id": "113728ab6700037b5a466b9b01dd0806f26c",
+    "import_id": "4f484429095417d3008b7854534c723fc0b0",
     "memo": "2 x Some kind of coat",
     "payee_name": "A Seller",
   },
