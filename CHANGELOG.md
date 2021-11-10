@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.2...v1.5.3) (2021-11-10)
+
+
+### Bug Fixes
+
+* correct refund totals to include tax ([9288bc0](https://github.com/starsprung/amazon-ynab-sync/commit/9288bc098416f9bafc24835618d323e64f25924d))
+
 ## [1.5.2](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.1...v1.5.2) (2021-01-14)
 
 
