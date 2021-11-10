@@ -147,7 +147,7 @@ export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTr
           title: item.title,
           seller: item.seller,
           quantity: item.quantity,
-          amount: item.refundAmount,
+          amount: item.refundAmount + (item.refundTaxAmount ?? 0),
         });
       }
     }
