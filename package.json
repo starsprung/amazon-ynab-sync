@@ -1,6 +1,6 @@
 {
   "name": "amazon-ynab-sync",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Sync Amazon.com orders to You Need a Budget",
   "keywords": [
     "ynab",

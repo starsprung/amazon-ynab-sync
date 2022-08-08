@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.3...v1.5.4) (2022-08-08)
+
+
+### Bug Fixes
+
+* update amazon-order-reports-api ([010fc96](https://github.com/starsprung/amazon-ynab-sync/commit/010fc9650adad46b45b8e20dfb88f4eaf9133e7b))
+
 ## [1.5.3](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.2...v1.5.3) (2021-11-10)
 
 
