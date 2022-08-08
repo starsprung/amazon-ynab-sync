@@ -142,7 +142,7 @@ export const getAmazonTransactions = async function* (): AsyncGenerator<AmazonTr
       if (item.refundAmount) {
         yield createTransation(seenIds, 'refund', {
           orderId: item.orderId,
-          date: item.orderDate,
+          date: item.refundDate,
           asinIsbn: item.asinIsbn,
           title: item.title,
           seller: item.seller,
