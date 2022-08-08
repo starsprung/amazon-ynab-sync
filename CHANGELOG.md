@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.4...v2.0.0) (2022-08-08)
+
+
+### Bug Fixes
+
+* use refund date for refund transactions ([d083789](https://github.com/starsprung/amazon-ynab-sync/commit/d083789706e3548d460ba30c3d8102a1f1a9ec5e))
+
+
+### BREAKING CHANGES
+
+* refund transaction hashes changed
+
 ## [1.5.4](https://github.com/starsprung/amazon-ynab-sync/compare/v1.5.3...v1.5.4) (2022-08-08)
 
 
